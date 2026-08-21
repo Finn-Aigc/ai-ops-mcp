@@ -1,0 +1,65 @@
+{
+  "name": "ai-ops-mcp",
+  "version": "0.1.0",
+  "description": "Local SSH credential broker and MCP server",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "ai-ops": "dist/index.js",
+    "ai-ops-mcp": "dist/mcp-entry.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "author": "AI Ops MCP contributors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Finn-Aigc/ai-ops-mcp.git"
+  },
+  "homepage": "https://github.com/Finn-Aigc/ai-ops-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/Finn-Aigc/ai-ops-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "ssh",
+    "sftp",
+    "credential-broker",
+    "model-context-protocol",
+    "ai-ops"
+  ],
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "test": "node --test --import tsx \"test/**/*.test.ts\"",
+    "test:e2e:core": "node test/e2e/live-server.mjs",
+    "test:e2e:mcp": "node test/e2e/mcp-live.mjs",
+    "test:e2e:auth": "node test/e2e/auth-modes-live.mjs",
+    "test:e2e:agent": "node test/e2e/agent-live.mjs",
+    "test:e2e:cleanup": "node test/e2e/cleanup-audit-live.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.0",
+    "@napi-rs/keyring": "^1.3.0",
+    "commander": "^14.0.2",
+    "ssh2": "^1.17.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "@types/ssh2": "^1.15.5",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
