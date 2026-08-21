@@ -75,7 +75,7 @@ try {
   assert.equal(added.exitCode, 0, added.stderr);
   const listed = await runWithEnvironment(sshAddExecutable, ["-l", "-E", "sha256"], agentEnvironment);
   assert.equal(listed.exitCode, 0, listed.stderr);
-  assert.match(listed.stdout, new RegExp(fingerprint.replace(/[+]/g, "\\+")));
+  assert(listed.stdout.includes(fingerprint), `SSH Agent did not list fingerprint ${fingerprint}.`);
 
   const install = await app.operations.runCommand({
     serverId: passwordServerId,
