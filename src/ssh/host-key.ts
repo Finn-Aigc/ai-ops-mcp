@@ -25,7 +25,7 @@ export function probeHostKey(host: string, port: number, timeoutMs = 15_000): Pr
       if (error) reject(error);
       else resolve(info!);
     };
-    client.once("error", (error) => {
+    client.on("error", (error) => {
       if (!settled) finish(error);
     });
     client.connect({
